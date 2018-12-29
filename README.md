@@ -71,10 +71,10 @@ sudo python reader.py
 ```
 
 Credits:  
-Major thanks to the original contributor of this:
+Major thanks to the original contributor of this:  
 https://github.com/rijinmk
 
-Reference:
+Reference:  
 https://github.com/rijinmk/code-qr-code-reader-rpi3
 
 
