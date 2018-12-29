@@ -70,11 +70,11 @@ If you want to run the code enter
 sudo python reader.py
 ```
 
-Credits:  
+*Credits:*  
 Major thanks to the original contributor of this:  
 https://github.com/rijinmk
 
-Reference:  
+*Reference:*  
 https://github.com/rijinmk/code-qr-code-reader-rpi3
 
 
