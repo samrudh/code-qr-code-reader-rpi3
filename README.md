@@ -1,12 +1,12 @@
 ## QR code reader on a Raspberry Pi 3
 
-This guide will show you how to create a QR code reader by using the `zbarlight` python library and `fswebcam` to take the picture. We will not be using `open cv` or any other image processing libraries. 
+This guide will show you how to create a QR code reader by using the `zbarlight` python library and `picamera` to take the picture. We will not be using `open cv` or any other image processing libraries. 
 
 ### What you'll need
 
 * Raspberry Pi 2 / 3
 * MicroSD Card with Raspbian on it ([Tutorial](https://github.com/rijinmk/guide-to-install-any-os-terminal-rpi3))
-* A USB webcam 
+* A picamera module (like [this](https://www.raspberrypi.org/products/camera-module-v2/))
 * Micro USB cable
 * Keyboard, Mouse, Monitor
 * HDMI cable for the monitor
@@ -32,35 +32,12 @@ This will take some time depending on your internet speed and also the amount of
 You will need to install this to access the webcam from the commandline. To install this you will need to use `apt-get`. 
 
 ```bash
-sudo apt-get install fswebcam
+sudo apt-get install python-picamera python3-picamera
 ```
 
-This will install fswebcam. Now insert your USB webcam, to check if it's connected, enter in the command
+This will install picamera module for using Picamera hardware from python
 
-```bash
-ls /dev/ | grep video
-```
-
-If `video0` is the output that means you are good to go, The webcam is connected. Now enter: 
-
-```bash
-sudo fswebcam image.jpg
-```
-
-This will take a picture named `image.jpg`.
-To check if you have taken the image, Enter: 
-
-```bash
-ls | grep image
-```
-
-If you see a file named `image.jpg`, that means your web cam is working. But if your above output for `ls /dev/ | grep video` was something else, for example `video2`. We have to pass an additional argument to `sudo fswebcam image.jpg`. Which is: 
-
-```bash
-sudo fswebcam -d /dev/video2 image.jpg
-```
-
-There is one more argument that we pass through to this command which is `-q` which means `quite`, This is to avoid the extra wordings that come when the photo is being taken. 
+ 
 
 #### STEP 3 - Installing `zbarlight`
 
@@ -78,23 +55,27 @@ Then we have to install the `zbarlight`
 sudo pip install zbarlight
 ```
 
-After this you can run the `reader.py` python program that I have written to test if it works. But before you proceed, we need to create a folder named `qr_codes` right outside the `reader.py` file. This folder will store all the QR codes. 
-
+After this you can run the `reader.py` python program that I have written to test if it works. It will first save capture 'foo.jpg' using picamera and then will attempt to read QR code from the same image.
 This `reader.py` program does the following: 
 
-* Runs the command `fswebcam -q image_name.ext`
+* Runs get_image function to capture 'foo.jpg' using PiCamera
 * Checks if it has QR Codes 
-* Stores the QR code onto the `qr_codes/` folder
-* If there is no QR code present after we run it through `zbarlight`, the image is deleted. 
-* Else the image stays there, and a `qr_code_messages.txt` file is created with the QR code message onto it. 
-* This file seperates the messages with certain delimiters
+* Prints qr code information if available
+* If there is no QR code present after we run it through `zbarlight` then 'No QR code found' message will be printed 
+
 
 If you want to run the code enter
 
 ```bash
-sudo python reader.py 0
+sudo python reader.py
 ```
 
-This is all you need to do / know for the QR code reader to work, If you want the detailed explationation of the code, I will be writing it soon. 
+Credits:
+Major thanks to the original contributor of this:
+https://github.com/rijinmk
+
+Reference:
+https://github.com/rijinmk/code-qr-code-reader-rpi3
+
 
 
