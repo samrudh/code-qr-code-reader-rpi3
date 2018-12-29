@@ -27,9 +27,9 @@ sudo apt-get update -y && sudo apt-get upgrade -y
 
 This will take some time depending on your internet speed and also the amount of package's that are installed onto your Raspberry Pi's OS.
 
-#### STEP 2 - Installing and running `fswebcam` 
+#### STEP 2 - Installing and running `picamera` 
 
-You will need to install this to access the webcam from the commandline. To install this you will need to use `apt-get`. 
+You will need to install this to access the picamera hardware python. To install this you will need to use `apt-get`. 
 
 ```bash
 sudo apt-get install python-picamera python3-picamera
